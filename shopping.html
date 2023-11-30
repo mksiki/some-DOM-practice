@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping list example</title>
+    <style>
+      li {
+        margin-bottom: 10px;
+      }
+
+      li button {
+        font-size: 8px;
+        margin-left: 20px;
+        color: #666;
+      }
+    </style>
+  </head>
+  <body>
+
+    <h1>My shopping list</h1>
+
+    <div>
+      <label for="item">Enter a new item:</label>
+      <input type="text" name="item" id="item">
+      <button id="btn">Add item</button>
+    </div>
+
+    <ul id="itemList">
+
+    </ul>
+
+    <script>
+        var ulElement = document.getElementById("itemList");
+        const btn = document.querySelector('#btn');
+        const inputElement = document.getElementById("item");
+
+        btn.addEventListener('click', () => {
+            // Get the value from the input text
+            var newItemText = document.getElementById("item").value;
+
+            // This will create a new li
+            var newItem = document.createElement("li");
+            newItem.textContent = newItemText;
+
+            // Create three vars that hol reference to to our list, span, and button
+            const listItem = document.createElement("li");
+            const itemText = document.createElement("span");
+            const deleteButton = document.createElement("button");
+
+            // This appends span element and button element as child elements to the list.
+            listItem.appendChild(itemText);
+            listItem.appendChild(deleteButton);
+
+            //  Content of the two new elements, item text is = the the element we defined in the very
+            //begining
+            itemText.textContent = newItemText;
+            deleteButton.textContent = "Delete";
+
+            // This now adds the new list we created up above just right now as a child of the,
+            // original ul we have.
+            ulElement.appendChild(listItem);
+
+            // This checks if the delte button was clicked then we remove the child list to the 
+            // ul parent list
+            deleteButton.addEventListener('click', function() {
+                ulElement.removeChild(listItem);
+            });
+
+            // Focus the input element ready for entering the next shopping list item.
+            inputElement.focus()
+
+            // This clears the input
+            inputElement.value = "";
+        })
+
+        
+    </script>
+  </body>
+</html>
